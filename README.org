@@ -1,0 +1,40 @@
+* company-org-block - a company completion backend for org blocks
+
+[[file:company-org-block.gif]]
+
+When enabled, the character "<" triggers company completion of org blocks.
+
+* Install
+
+Use your preferred way to add /company-org-block/ to /company-backends/.
+
+One way is to add it in an /org-mode-hook/:
+
+#+begin_src emacs-lisp
+  (require 'company-org-block)
+
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends)
+                           'company-org-block)))
+#+end_src
+
+* Block edit mode /company-org-block-edit-mode/
+
+After block insertion is triggered, you have the option to configure the edit behavior via /company-org-block-edit-mode/.
+
+** 'auto (default)
+
+Automatically edit, no prompt. May seem excessive at first, but I've become heavily reliant on this mode. Give it some time.
+
+[[file:automatic.gif]]
+
+** 'prompt
+
+Ask me (via /yes-or-no-p/) after insertion.
+
+[[file:prompted.gif]]
+
+** nil
+
+Prefer no editing after insertion? Set to nil.
