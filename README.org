@@ -2,9 +2,9 @@
 
 Insert Emacs org blocks with completion (via [[https://github.com/company-mode/company-mode][company mode]]).
 
-[[file:hello-company-org-block.gif]]
-
 When enabled, the character "<" triggers company completion of org blocks.
+
+[[file:hello-company-org-block.gif]]
 
 * Install
 
