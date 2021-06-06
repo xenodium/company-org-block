@@ -10,7 +10,7 @@ When enabled, the character "<" triggers company completion of org blocks.
 
 Use your preferred way to add /company-org-block/ to /company-backends/.
 
-** Melpa
+** Melpa [[https://melpa.org/#/company-org-block][file:https://melpa.org/packages/company-org-block-badge.svg]]
 
 /company-org-block/ is [[https://melpa.org/#/company-org-block][available on melpa]].
 
