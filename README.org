@@ -20,7 +20,7 @@ Use your preferred way to add /company-org-block/ to /company-backends/.
 #+begin_src emacs-lisp
   (require 'company-org-block)
 
-  (setq company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or nil
+  (setq company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or  'inline
 
   (add-hook 'org-mode-hook
             (lambda ()
@@ -36,7 +36,7 @@ Alternatively, can also install via [[https://github.com/jwiegley/use-package][u
   (use-package company-org-block
     :ensure t
     :custom
-    (company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or nil
+    (company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or 'inline
     :hook ((org-mode . (lambda ()
                          (setq-local company-backends '(company-org-block))
                          (company-mode +1)))))
@@ -68,8 +68,8 @@ Ask me (via /yes-or-no-p/) after insertion.
 
 [[file:noedit.gif]]
 
-Prefer no editing after insertion? Set to nil.
+Prefer no editing after insertion? Set to 'inline.
 
 #+begin_src emacs-lisp
-  (setq company-org-block-edit-style nil)
+  (setq company-org-block-edit-style 'inline)
 #+end_src

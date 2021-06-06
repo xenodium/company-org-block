@@ -47,9 +47,9 @@
 (defcustom company-org-block-edit-style 'auto
   "Customize how to enter edit mode after block is inserted."
   :type '(choice
-	  (const :tag "nil: no edit after insertion" nil)
-	  (const :tag "prompt: ask before edit" prompt)
-	  (const :tag "auto edit, no prompt" auto)))
+	  (const :tag "inline: no edit mode invoked after insertion" inline)
+	  (const :tag "prompt: ask before entering edit mode" prompt)
+	  (const :tag "auto: automatically enter edit mode" auto)))
 
 (defvar company-org-block--regexp "<\\([^ ]*\\)")
 
