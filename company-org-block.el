@@ -42,7 +42,7 @@
   "If t, insert org-babel-default-header-args:lang into block header."
   :type 'boolean)
 
-(defcustom company-org-block-edit-mode 'auto
+(defcustom company-org-block-edit-style 'auto
   "Customize how to enter edit mode after block is inserted."
   :type '(choice
 	  (const :tag "nil: no edit after insertion" nil)
@@ -108,9 +108,9 @@ COMMAND and ARG are sent by company itself."
   (insert (make-string org-edit-src-content-indentation ?\s))
   (save-excursion
     (insert (format "\n#+end_%s" end)))
-  (cond ((eq company-org-block-edit-mode 'auto)
+  (cond ((eq company-org-block-edit-style 'auto)
          (org-edit-special))
-        ((and (eq company-org-block-edit-mode 'prompt)
+        ((and (eq company-org-block-edit-style 'prompt)
               (yes-or-no-p "Edit now?"))
          (org-edit-special))))
 
