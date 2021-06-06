@@ -3,7 +3,7 @@
 ;; Author: Alvaro Ramirez
 ;; Package-Requires: ((emacs "25.1") (company "0.8.0") (org "9.2.0"))
 ;; URL: https://github.com/xenodium/company-org-block
-;; Version: 0.2
+;; Version: 0.3
 
 ;; This package is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -97,7 +97,7 @@ COMMAND and ARG are sent by company itself."
     (company-org-block--wrap-point (format "src %s%s"
                                            insertion
                                            (if company-org-block-explicit-lang-defaults
-                                               (company-org-block--lang-header-defaults "insertion")
+                                               (company-org-block--lang-header-defaults insertion)
                                              ""))
                                    "src")))
 
