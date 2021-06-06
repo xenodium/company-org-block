@@ -110,11 +110,18 @@ COMMAND and ARG are sent by company itself."
   (insert (make-string org-edit-src-content-indentation ?\s))
   (save-excursion
     (insert (format "\n#+end_%s" end)))
-  (cond ((eq company-org-block-edit-style 'auto)
-         (org-edit-special))
+  (cond ((and (eq company-org-block-edit-style 'auto)
+              (company-org-block--edit-src-code-p))
+         (org-edit-src-code))
         ((and (eq company-org-block-edit-style 'prompt)
+              (company-org-block--edit-src-code-p)
               (yes-or-no-p "Edit now?"))
-         (org-edit-special))))
+         (org-edit-src-code))))
+
+(defun company-org-block--edit-src-code-p ()
+  "Return t if `edit-src-code' can edit in a separate major mode."
+  (memq (org-element-type (org-element-at-point))
+        '(example-block src-block)))
 
 (defun company-org-block--grab-symbol-cons ()
   "Return cons with symbol and t whenever prefix of < is found.
