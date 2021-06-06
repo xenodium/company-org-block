@@ -1,4 +1,4 @@
-* company-org-block - a company completion backend for org blocks
+* company-org-block - Insert Emacs org blocks with completion
 
 [[file:company-org-block.gif]]
 
@@ -8,10 +8,17 @@ When enabled, the character "<" triggers company completion of org blocks.
 
 Use your preferred way to add /company-org-block/ to /company-backends/.
 
-One way is to add it in an /org-mode-hook/:
+** Melpa
+
+/company-org-block/ is [[https://melpa.org/#/company-org-block][available on melpa]].
+
+1. Install via M-x /package-install/.
+2. Require, set edit mode, and add company backend:
 
 #+begin_src emacs-lisp
   (require 'company-org-block)
+
+  (setq company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or nil
 
   (add-hook 'org-mode-hook
             (lambda ()
@@ -19,22 +26,46 @@ One way is to add it in an /org-mode-hook/:
                            'company-org-block)))
 #+end_src
 
-* Block edit mode /company-org-block-edit-mode/
+** use-package
 
-After block insertion is triggered, you have the option to configure the edit behavior via /company-org-block-edit-mode/.
+Alternatively, can also install via [[https://github.com/jwiegley/use-package][use-package]] with something like:
 
-** 'auto (default)
+#+begin_src emacs-lisp
+  (use-package company-org-block
+    :ensure t
+    :custom
+    (company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or nil
+    :hook ((org-mode . (lambda ()
+                         (setq-local company-backends '(company-org-block))
+                         (company-mode +1)))))
+#+end_src
+
+* Block edit style
+
+You can configure what happens immediately after inserting a block, you have the option to configure the style via /company-org-block-edit-style/.
+
+** Auto (default)
 
 Automatically edit, no prompt. May seem excessive at first, but I've become heavily reliant on this mode. Give it some time.
 
+*Note*: This is the default. No need to set /company-org-block-edit-style/ to 'auto.
+
 [[file:automatic.gif]]
 
-** 'prompt
+** Prompt
 
 Ask me (via /yes-or-no-p/) after insertion.
 
+#+begin_src emacs-lisp
+  (setq company-org-block-edit-style 'prompt)
+#+end_src
+
 [[file:prompted.gif]]
 
-** nil
+** No edit
 
 Prefer no editing after insertion? Set to nil.
+
+#+begin_src emacs-lisp
+  (setq company-org-block-edit-style nil)
+#+end_src
