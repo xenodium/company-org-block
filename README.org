@@ -66,6 +66,8 @@ Ask me (via /yes-or-no-p/) after insertion.
 
 ** No edit
 
+[[file:noedit.gif]]
+
 Prefer no editing after insertion? Set to nil.
 
 #+begin_src emacs-lisp
