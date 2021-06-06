@@ -108,10 +108,12 @@ COMMAND and ARG are sent by company itself."
 #+end_END"
   (org-indent-line)
   (insert (format "#+begin_%s\n" begin))
+  (org-indent-line) ;; pushes to start of indented code-block.
   (insert (make-string org-edit-src-content-indentation ?\s))
   (save-excursion
-    (insert (format "\n#+end_%s" end))
-    (org-indent-line))
+    (insert "\n")
+    (org-indent-line)
+    (insert (format "#+end_%s\n" end)))
   (cond ((eq company-org-block-edit-style 'auto)
          (org-edit-special))
         ((and (eq company-org-block-edit-style 'prompt)
