@@ -106,10 +106,14 @@ COMMAND and ARG are sent by company itself."
 #+begin_BEGIN
   |
 #+end_END"
+  (org-indent-line)
   (insert (format "#+begin_%s\n" begin))
+  (org-indent-line) ;; pushes to start of indented code-block.
   (insert (make-string org-edit-src-content-indentation ?\s))
   (save-excursion
-    (insert (format "\n#+end_%s" end)))
+    (insert "\n")
+    (org-indent-line)
+    (insert (format "#+end_%s\n" end)))
   (cond ((and (eq company-org-block-edit-style 'auto)
               (company-org-block--edit-src-code-p))
          (org-edit-src-code))
@@ -127,7 +131,7 @@ COMMAND and ARG are sent by company itself."
   "Return cons with symbol and t whenever prefix of < is found.
 For example: \"<e\" -> (\"e\" . t)"
   (when (looking-back (if company-org-block-complete-at-bol
-                          (concat "^" company-org-block--regexp)
+                          (concat "^[[:space:]]*" company-org-block--regexp)
                         company-org-block--regexp)
                       (line-beginning-position))
     (cons (match-string-no-properties 1) t)))
