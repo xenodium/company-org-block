@@ -10,8 +10,10 @@ When enabled, the character "<" triggers company completion of org blocks.
 
 Use your preferred way to add /company-org-block/ to /company-backends/.
 
-** Melpa
-/company-org-block/ is available on melpa [[https://melpa.org/#/company-org-block][file:https://melpa.org/packages/company-org-block-badge.svg]].
+** MELPA
+/company-org-block/ is available on [[https://melpa.org][MELPA]].
+
+[[https://melpa.org/#/company-org-block][file:https://melpa.org/packages/company-org-block-badge.svg]].
 
 1. Install via M-x /package-install/.
 2. Require, set edit style, and add company backend:
