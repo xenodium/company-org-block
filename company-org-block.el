@@ -110,11 +110,16 @@ COMMAND and ARG are sent by company itself."
   (insert (make-string org-edit-src-content-indentation ?\s))
   (save-excursion
     (insert (format "\n#+end_%s" end)))
-  (cond ((eq company-org-block-edit-style 'auto)
-         (org-edit-special))
-        ((and (eq company-org-block-edit-style 'prompt)
-              (yes-or-no-p "Edit now?"))
-         (org-edit-special))))
+  (condition-case err
+      (cond ((eq company-org-block-edit-style 'auto)
+             (org-edit-special))
+            ((and (eq company-org-block-edit-style 'prompt)
+                  (yes-or-no-p "Edit now?"))
+             (org-edit-special)))
+    (user-error
+     (unless (string-equal "No special environment to edit here"
+                           (error-message-string err))
+       (signal (car err) (cdr err))))))
 
 (defun company-org-block--grab-symbol-cons ()
   "Return cons with symbol and t whenever prefix of < is found.
