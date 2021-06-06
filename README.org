@@ -20,7 +20,7 @@ Use your preferred way to add /company-org-block/ to /company-backends/.
 #+begin_src emacs-lisp
   (require 'company-org-block)
 
-  (setq company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or  'inline
+  (setq company-org-block-edit-style 'auto) ;; 'auto, 'prompt, or 'inline
 
   (add-hook 'org-mode-hook
             (lambda ()
