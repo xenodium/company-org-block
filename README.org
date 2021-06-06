@@ -13,7 +13,7 @@ Use your preferred way to add /company-org-block/ to /company-backends/.
 /company-org-block/ is [[https://melpa.org/#/company-org-block][available on melpa]].
 
 1. Install via M-x /package-install/.
-2. Require, set edit mode, and add company backend:
+2. Require, set edit style, and add company backend:
 
 #+begin_src emacs-lisp
   (require 'company-org-block)
@@ -46,7 +46,7 @@ You can configure what happens immediately after inserting a block, you have the
 
 ** Auto (default)
 
-Automatically edit, no prompt. May seem excessive at first, but I've become heavily reliant on this mode. Give it some time.
+Automatically edit, no prompt. May seem excessive at first, but I've become heavily reliant on this style. Give it some time.
 
 *Note*: This is the default. No need to set /company-org-block-edit-style/ to 'auto.
 
