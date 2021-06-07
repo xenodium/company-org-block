@@ -89,6 +89,9 @@ COMMAND and ARG are sent by company itself."
   "Replace INSERTION with generated source block."
   (delete-region (point) (- (point) (1+ ;; Include "<" in length.
                                      (length insertion))))
+  ;; If < trigger generated a matching >, delete it.
+  (when (looking-at ">")
+    (delete-char 1))
   (if (company-org-block--template-p insertion)
       (company-org-block--wrap-point insertion
                                      ;; May be multiple words.
