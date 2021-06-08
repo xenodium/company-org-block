@@ -74,3 +74,7 @@ Prefer no editing after insertion? Set to 'inline.
 #+begin_src emacs-lisp
   (setq company-org-block-edit-style 'inline)
 #+end_src
+
+* Supported languages
+
+/company-org-block/ draws completion candidates from [[https://orgmode.org/worg/org-contrib/babel/languages/index.html][org-babel-load-languages]]. The more languages added, the more completions you'll see.
