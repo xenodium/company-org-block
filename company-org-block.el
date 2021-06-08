@@ -80,7 +80,11 @@ COMMAND and ARG are sent by company itself."
                (append
                 (mapcar #'prin1-to-string
                         (map-keys org-babel-load-languages))
-                (map-values org-structure-template-alist)
+                ;; Filter out non-strings (pre org 9.2 templates)
+                ;; https://github.com/xenodium/company-org-block/issues/7
+                (seq-filter
+                 #'stringp
+                 (map-values org-structure-template-alist))
                 (map-values org-babel-tangle-lang-exts)))))
 
 (defun company-org-block--template-p (template)
