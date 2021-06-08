@@ -32,6 +32,7 @@
 (require 'company)
 (require 'map)
 (require 'org)
+(require 'org-element)
 (require 'seq)
 
 (defgroup company-org-block nil
