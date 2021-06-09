@@ -24,12 +24,15 @@
 ;; To enable, add `company-org-block' to `company-backend'.
 ;;
 ;; Configure edit style via `company-org-block-edit-style'.
+;;
+;; Completion candidates are drawn from `org-babel-load-languages'.
 
 ;;; Code:
 
 (require 'company)
 (require 'map)
 (require 'org)
+(require 'org-element)
 (require 'seq)
 
 (defgroup company-org-block nil
@@ -74,11 +77,34 @@ COMMAND and ARG are sent by company itself."
               ;; `org-structure-template-alist', join, and sort.
               (seq-sort
                #'string-lessp
-               (append
-                (mapcar #'prin1-to-string
-                        (map-keys org-babel-load-languages))
-                (map-values org-structure-template-alist)
-                (map-values org-babel-tangle-lang-exts)))))
+               (seq-uniq
+                (append
+                 (company-org-block--languages)
+                 (company-org-block--templates)
+                 (company-org-block--languages-from-extensions))))))
+
+(defun company-org-block--languages ()
+  "Get language names."
+  (mapcar #'prin1-to-string
+          ;; Filter out non-symbols.
+          (seq-filter
+           (lambda (item)
+             (symbolp item))
+           (map-keys org-babel-load-languages))))
+
+(defun company-org-block--templates ()
+  "Get template names."
+  ;; Filter out non-strings (pre org 9.2 templates)
+  ;; https://github.com/xenodium/company-org-block/issues/7
+  (seq-filter
+   #'stringp
+   (map-values org-structure-template-alist)))
+
+(defun company-org-block--languages-from-extensions ()
+"Get language names from extensions."
+  (seq-filter
+   #'stringp
+   (map-values org-babel-tangle-lang-exts)))
 
 (defun company-org-block--template-p (template)
   "Check if there is a TEMPLATE available for completion."
