@@ -142,7 +142,7 @@ COMMAND and ARG are sent by company itself."
   (save-excursion
     (insert "\n")
     (org-indent-line)
-    (insert (format "#+end_%s\n" end)))
+    (insert (format "#+end_%s" end)))
   (cond ((and (eq company-org-block-edit-style 'auto)
               (company-org-block--edit-src-code-p))
          (org-edit-src-code))
