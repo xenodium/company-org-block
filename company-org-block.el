@@ -54,6 +54,11 @@
 	  (const :tag "prompt: ask before entering edit mode" prompt)
 	  (const :tag "auto: automatically enter edit mode" auto)))
 
+(defcustom company-org-block-auto-indent t
+  "If t, automatically indent source block using `org-indent-line'.
+Otherwise, insert block at cursor position."
+  :type 'boolean)
+
 (defvar company-org-block--regexp "<\\([^ ]*\\)")
 
 (defun company-org-block (command &optional arg &rest _ignored)
@@ -135,7 +140,8 @@ COMMAND and ARG are sent by company itself."
 #+begin_BEGIN
   |
 #+end_END"
-  (org-indent-line)
+  (when company-org-block-auto-indent
+    (org-indent-line))
   (insert (format "#+begin_%s\n" begin))
   (org-indent-line) ;; pushes to start of indented code-block.
   (insert (make-string org-edit-src-content-indentation ?\s))
