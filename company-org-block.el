@@ -54,9 +54,9 @@
 	  (const :tag "prompt: ask before entering edit mode" prompt)
 	  (const :tag "auto: automatically enter edit mode" auto)))
 
-(defcustom company-org-block-apply-init-indent t
-  "If t, insert source block by following rule defined in `org-indent-line'.
-If nil, source block will be inserted at the cursor position in a tree."
+(defcustom company-org-block-auto-indent t
+  "If t, automatically indent source block using `org-indent-line'.
+Otherwise, insert block at cursor position."
   :type 'boolean)
 
 (defvar company-org-block--regexp "<\\([^ ]*\\)")
@@ -140,7 +140,7 @@ COMMAND and ARG are sent by company itself."
 #+begin_BEGIN
   |
 #+end_END"
-  (when company-org-block-apply-init-indent
+  (when company-org-block-auto-indent
     (org-indent-line))
   (insert (format "#+begin_%s\n" begin))
   (org-indent-line) ;; pushes to start of indented code-block.
