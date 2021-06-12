@@ -56,7 +56,7 @@
 
 (defcustom company-org-block-apply-init-indent t
   "If t, insert source block by following rule defined in `org-indent-line'.
-If non-nil, source block will be inserted at the cursor position in a tree."
+If nil, source block will be inserted at the cursor position in a tree."
   :type 'boolean)
 
 (defvar company-org-block--regexp "<\\([^ ]*\\)")
