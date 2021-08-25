@@ -106,7 +106,7 @@ COMMAND and ARG are sent by company itself."
    (map-values org-structure-template-alist)))
 
 (defun company-org-block--languages-from-extensions ()
-"Get language names from extensions."
+  "Get language names from extensions."
   (seq-filter
    #'stringp
    (map-values org-babel-tangle-lang-exts)))
@@ -123,17 +123,26 @@ COMMAND and ARG are sent by company itself."
   ;; If < trigger generated a matching >, delete it.
   (when (looking-at ">")
     (delete-char 1))
-  (if (company-org-block--template-p insertion)
-      (company-org-block--wrap-point insertion
-                                     ;; May be multiple words.
-                                     ;; Take the first one.
-                                     (nth 0 (split-string insertion)))
-    (company-org-block--wrap-point (format "src %s%s"
-                                           insertion
-                                           (if company-org-block-explicit-lang-defaults
-                                               (company-org-block--lang-header-defaults insertion)
-                                             ""))
-                                   "src")))
+  (cond ((string-equal insertion "src")
+         ;; src templates have no associated language. Ask user for one.
+         (company-org-block--wrap-point (format "src %s%s"
+                                                (read-string "language: ")
+                                                (if company-org-block-explicit-lang-defaults
+                                                    (company-org-block--lang-header-defaults insertion)
+                                                  ""))
+                                        "src"))
+        ((company-org-block--template-p insertion)
+         (company-org-block--wrap-point insertion
+                                        ;; May be multiple words.
+                                        ;; Take the first one.
+                                        (nth 0 (split-string insertion))))
+        (t
+         (company-org-block--wrap-point (format "src %s%s"
+                                                insertion
+                                                (if company-org-block-explicit-lang-defaults
+                                                    (company-org-block--lang-header-defaults insertion)
+                                                  ""))
+                                        "src"))))
 
 (defun company-org-block--wrap-point (begin end)
   "Wrap point with block using BEGIN and END.  For example:
@@ -150,7 +159,9 @@ COMMAND and ARG are sent by company itself."
   (insert (make-string org-edit-src-content-indentation ?\s))
   (cond ((and (eq company-org-block-edit-style 'auto)
               (company-org-block--edit-src-code-p))
-         (org-edit-src-code))
+         ;; Only enter major mode if there's a language recognized for it.
+         (when (org-element-property :language (org-element-at-point))
+           (org-edit-src-code)))
         ((and (eq company-org-block-edit-style 'prompt)
               (company-org-block--edit-src-code-p)
               (yes-or-no-p "Edit now?"))
