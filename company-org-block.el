@@ -126,7 +126,7 @@ COMMAND and ARG are sent by company itself."
   (cond ((string-equal insertion "src")
          ;; src templates have no associated language. Ask user for one.
          (company-org-block--wrap-point (format "src %s%s"
-                                                (read-string "language: ")
+                                                (read-string "Language: ")
                                                 (if company-org-block-explicit-lang-defaults
                                                     (company-org-block--lang-header-defaults insertion)
                                                   ""))
