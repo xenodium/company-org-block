@@ -3,7 +3,7 @@
 ;; Author: Alvaro Ramirez
 ;; Package-Requires: ((emacs "25.1") (company "0.8.0") (org "9.2.0"))
 ;; URL: https://github.com/xenodium/company-org-block
-;; Version: 0.3
+;; Version: 0.4
 
 ;; This package is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -109,7 +109,7 @@ COMMAND and ARG are sent by company itself."
   "Get language names from extensions."
   (seq-filter
    #'stringp
-   (map-values org-babel-tangle-lang-exts)))
+   (map-keys org-babel-tangle-lang-exts)))
 
 (defun company-org-block--template-p (template)
   "Check if there is a TEMPLATE available for completion."
