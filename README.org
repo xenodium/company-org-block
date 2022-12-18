@@ -1,4 +1,5 @@
 👉 [[https://github.com/sponsors/xenodium][Support my work via GitHub Sponsors]]
+
 * company-org-block
 
 [[https://www.buymeacoffee.com/xenodium][Buy me a coffee ☕]]
@@ -82,4 +83,6 @@ Prefer no editing after insertion? Set to 'inline.
 
 /company-org-block/ draws completion candidates from [[https://orgmode.org/worg/org-contrib/babel/languages/index.html][org-babel-load-languages]]. The more languages added, the more completions you'll see.
 
-[[https://www.buymeacoffee.com/xenodium][Buy me a coffee ☕]]
+* Support this work
+
+👉 [[https://github.com/sponsors/xenodium][Support my work via GitHub Sponsors]]
