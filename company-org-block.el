@@ -122,11 +122,12 @@ COMMAND and ARG are sent by company itself."
   "Return doc for CANDIDATE."
   (when (string-equal candidate "src")
     (setq candidate ""))
-  (company-doc-buffer
-   (with-temp-buffer
-     (insert "<" candidate)
-     (company-org-block--expand candidate)
-     (buffer-string))))
+  (let ((company-org-block-edit-style 'inline))
+    (company-doc-buffer
+     (with-temp-buffer
+       (insert "<" candidate)
+       (company-org-block--expand candidate)
+       (buffer-string)))))
 
 (defun company-org-block--expand (insertion)
   "Replace INSERTION with generated source block."
