@@ -3,7 +3,7 @@
 ;; Author: Alvaro Ramirez
 ;; Package-Requires: ((emacs "25.1") (company "0.8.0") (org "9.2.0"))
 ;; URL: https://github.com/xenodium/company-org-block
-;; Version: 0.4
+;; Version: 0.5
 
 ;; This package is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
